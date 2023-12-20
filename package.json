@@ -1,0 +1,26 @@
+{
+  "name": "nestjs-basics",
+  "version": "1.0.1",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "test:service": "yarn workspace service test",
+    "test:cov:service": "yarn workspace service test:cov",
+    "test:gateway": "yarn workspace gateway-api test",
+    "test:e2e": "yarn workspace gateway-api test:e2e",
+    "test:cov:gateway": "yarn workspace gateway-api test:cov",
+    "lint:service": "yarn workspace service lint",
+    "lint:gateway": "yarn workspace gateway-api lint",
+    "start:service": "yarn workspace service start",
+    "start:gateway": "yarn workspace gateway-api start",
+    "start:all": "concurrently \"yarn start:service\" \"yarn start:gateway\" ",
+    "lint:all": "yarn lint:service && yarn lint:gateway",
+    "test:all": "yarn test:service && yarn test:gateway",
+    "test:cov:all": "yarn test:cov:service && yarn test:cov:gateway",
+    "clear:all": "rimraf node_modules && rimraf yarn-error.log && rimraf yarn.lock && cd apps && for d in ./*/ ; do (cd \"$d\" && pwd && rimraf node_modules && rimraf package-lock.json && rimraf dist && rimraf coverage); done",
+    "typeorm:run": "yarn workspace service typeorm:run"
+  }
+}
